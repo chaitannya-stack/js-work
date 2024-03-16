@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Throw Dice</title>
+    <style>
+        .dice {
+            display: inline-block;
+            width: 100px;
+            height: 100px;
+            border: 2px solid black;
+            margin: 10px;
+            text-align: center;
+            line-height: 100px;
+            font-size: 24px;
+            font-weight: bold;
+            border-radius: 10px;
+        }
+        #winner {
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div id="member-1" class="dice"></div>
+    <div id="member-2" class="dice"></div>
+    <div id="member-3" class="dice"></div>
+    <button id="roll">ROLL THE DICE</button>
+    <div id="winner"></div>
+
+    <script>
+        document.getElementById("roll").addEventListener("click", function() {
+            var member1 = document.getElementById("member-1");
+            var member2 = document.getElementById("member-2");
+            var member3 = document.getElementById("member-3");
+            var winnerDiv = document.getElementById("winner");
+
+            var result1 = Math.floor(Math.random() * 6) + 1;
+            var result2 = Math.floor(Math.random() * 6) + 1;
+            var result3 = Math.floor(Math.random() * 6) + 1;
+
+            member1.textContent = result1;
+            member2.textContent = result2;
+            member3.textContent = result3;
+
+            var maxResult = Math.max(result1, result2, result3);
+            var minResult = Math.min(result1, result2, result3);
+
+            if (result1 === result2 && result2 === result3) {
+                member1.style.backgroundColor = "blue";
+                member2.style.backgroundColor = "blue";
+                member3.style.backgroundColor = "blue";
+                winnerDiv.textContent = "It's a draw!";
+            } else {
+                if (result1 === maxResult) {
+                    member1.style.backgroundColor = "green";
+                } else if (result1 === minResult) {
+                    member1.style.backgroundColor = "red";
+                } else {
+                    member1.style.backgroundColor = "yellow";
+                }
+
+                if (result2 === maxResult) {
+                    member2.style.backgroundColor = "green";
+                } else if (result2 === minResult) {
+                    member2.style.backgroundColor = "red";
+                } else {
+                    member2.style.backgroundColor = "yellow";
+                }
+
+                if (result3 === maxResult) {
+                    member3.style.backgroundColor = "green";
+                } else if (result3 === minResult) {
+                    member3.style.backgroundColor = "red";
+                } else {
+                    member3.style.backgroundColor = "yellow";
+                }
+
+                winnerDiv.textContent = "Winner: Member " + (maxResult === result1 ? "A" : maxResult === result2 ? "B" : "C");
+            }
+        });
+    </script>
+</body>
+</html>
